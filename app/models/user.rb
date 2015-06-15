@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
 
   def tweet(status)
     tweet = tweets.create!(:status => status)
-    # job_id = TweetWorker.perform_async(tweet.id)
-    job_id = TweetWorker.perform_at(0.05.hours.from_now, tweet.id, 1)
+    job_id = TweetWorker.perform_async(tweet.id)
+    # job_id = TweetWorker.perform_at(0.05.hours.from_now, tweet.id, 1)
     job_id
   end
 
