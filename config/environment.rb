@@ -29,6 +29,9 @@ require 'sidekiq'
 require 'sidekiq/api'
 require 'redis'
 
+uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/" )
+REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
