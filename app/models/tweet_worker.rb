@@ -2,6 +2,8 @@ class TweetWorker
   # Remember to create a migration!
   include Sidekiq::Worker
 
+  sidekiq_options :retry => 5
+
   def perform(tweet_id)
     tweet = Tweet.find(tweet_id)
     user = tweet.user
@@ -16,3 +18,5 @@ class TweetWorker
   end
 
 end
+
+
